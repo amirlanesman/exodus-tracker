@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <name>KML Export 5/14/2026 12:15:10 PM</name>
+    <name>KML Export 5/14/2026 5:14:29 PM</name>
     <Style id="style_emergency">
       <IconStyle>
         <colorMode>normal</colorMode>
@@ -4235,7 +4235,37 @@
 -30.584521,43.878075,30.76
 -30.569908,43.886561,-3.73
 -30.553815,43.89419,-1.7
--30.536135,43.901228,2.34</coordinates>
+-30.536135,43.901228,2.34
+-30.521736,43.910336,-1.7
+-30.502725,43.9173,-1.7
+-30.483241,43.923543,0.31
+-30.464336,43.93128,-1.7
+-30.444938,43.940376,4.37
+-30.423481,43.945333,4.37
+-30.403011,43.949658,2.34
+-30.383676,43.955086,2.34
+-30.365181,43.961095,2.34
+-30.345826,43.966973,8.43
+-30.327286,43.972016,0.31
+-30.308383,43.976598,-1.7
+-30.289241,43.980718,0.31
+-30.269736,43.983828,-3.73
+-30.249846,43.988003,-3.73
+-30.228731,43.990716,-5.76
+-30.208346,43.993366,0.31
+-30.188048,43.997003,-5.76
+-30.167535,43.998366,-11.84
+-30.14921,44.001123,-3.73
+-30.130735,44.004643,-1.7
+-30.110693,44.007378,-3.73
+-30.092346,44.010061,-3.73
+-30.073956,44.013945,-1.7
+-30.055375,44.018075,-1.7
+-30.036835,44.021798,-1.7
+-30.019883,44.025188,0.31
+-30.002868,44.02845,-3.73
+-29.98699,44.032828,-1.7
+-29.970831,44.03669,0.31</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4243,18 +4273,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-14T12:09:00Z</when>
+          <when>2026-05-14T17:09:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212043142</value>
+            <value>212109135</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/14/2026 12:09:00 PM</value>
+            <value>5/14/2026 5:09:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/14/2026 12:09:00 PM</value>
+            <value>5/14/2026 5:09:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4272,16 +4302,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>43.901228</value>
+            <value>44.036690</value>
           </Data>
           <Data name="Longitude">
-            <value>-30.536135</value>
+            <value>-29.970831</value>
           </Data>
           <Data name="Elevation">
-            <value>2.34 m from MSL</value>
+            <value>0.31 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>10.1 km/h</value>
+            <value>7.0 km/h</value>
           </Data>
           <Data name="Course">
             <value>67.50 ° True</value>
@@ -4308,7 +4338,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-30.536135,43.901228,2.34</coordinates>
+          <coordinates>-29.970831,44.03669,0.31</coordinates>
         </Point>
       </Placemark>
       </Folder>

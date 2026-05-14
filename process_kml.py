@@ -25,6 +25,11 @@ def process_kml(input_file, output_file):
     root = tree.getroot()
     ns = {'kml': 'http://www.opengis.net/kml/2.2'}
     
+    # Strip dynamic Garmin export timestamp to prevent empty git commits
+    doc_name = root.find('.//kml:Document/kml:name', ns)
+    if doc_name is not None and doc_name.text and doc_name.text.startswith('KML Export'):
+        doc_name.text = 'Garmin inReach Export'
+    
     folders = root.findall('.//kml:Folder', ns)
     
     for folder in folders:

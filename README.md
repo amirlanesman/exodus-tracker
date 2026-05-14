@@ -35,3 +35,18 @@ Then visit: http://localhost:8765
 
 - **API Keys**: Make sure to insert your own Windy Map API Key in `index.html`.
 - **Feed URL**: Update the Garmin Share URL inside `.github/workflows/update_data.yml` to target your specific tracker.
+
+### Setting up GitHub Pages
+To host this tracker online for free:
+1. Go to your repository on GitHub and click **Settings** > **Pages**.
+2. Under "Source", select **Deploy from a branch**.
+3. Select your `main` branch and the `/ (root)` folder, then click **Save**.
+4. GitHub will give you a public URL (e.g., `https://username.github.io/exodus-tracker/`) where your map is live.
+
+### Setting up GitHub Actions (Auto-updater)
+The tracker is configured to automatically download new positions from your Garmin tracker every 30 minutes. To make this work:
+1. Ensure your Garmin MapShare is enabled and the URL in `.github/workflows/update_data.yml` is correct.
+2. Go to your repository **Settings** > **Actions** > **General**.
+3. Scroll down to **Workflow permissions**.
+4. Select **Read and write permissions** and click **Save** (this allows the automated action to commit the updated `data.kml` to your repository).
+5. The action will now run automatically on schedule. You can also trigger it manually from the **Actions** tab by clicking the "Update Vessel Data" workflow and hitting "Run workflow".

@@ -208,6 +208,56 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* Links box */
+    #links-box {
+      border: 1px solid var(--bg-card-border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #links-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      background: rgba(255,255,255,0.04);
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    #links-toggle:hover { color: var(--accent); }
+    #links-toggle .chevron {
+      transition: transform 0.25s ease;
+      font-style: normal;
+      font-size: 10px;
+    }
+    #links-toggle.open .chevron { transform: rotate(180deg); }
+    #links-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    #links-content.open { max-height: 200px; }
+    .link-item {
+      display: block;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      border-top: 1px solid var(--bg-card-border);
+      transition: background 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .link-item:hover { background: rgba(99,179,237,0.08); }
+
     /* Error / waiting state */
     #error-msg {
       display: none;
@@ -361,6 +411,18 @@
     <button id="refresh-btn" onclick="loadKML()">
       <span class="btn-icon">↻</span> Refresh Data
     </button>
+
+    <div id="links-box">
+      <button id="links-toggle" onclick="toggleLinks()" aria-expanded="false">
+        🔗 Links
+        <i class="chevron">▾</i>
+      </button>
+      <div id="links-content">
+        <a class="link-item" href="https://exodussail.com/" target="_blank" rel="noopener">⛵ Learn about Exodus</a>
+        <a class="link-item" href="https://exodussail.com/support/" target="_blank" rel="noopener">❤️ Support Exodus</a>
+        <a class="link-item" href="https://share.garmin.com/Exodussail" target="_blank" rel="noopener">📡 Garmin Tracker</a>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -707,6 +769,14 @@ function updateDataAge(ts) {
 setInterval(() => {
   if (lastTimestamp) updateDataAge(lastTimestamp);
 }, 60000);
+
+function toggleLinks() {
+  const btn     = document.getElementById('links-toggle');
+  const content = document.getElementById('links-content');
+  const isOpen  = content.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.setAttribute('aria-expanded', isOpen);
+}
 
 // ── Helpers ─────────────────────────────────────
 function formatCoords(lat, lon) {

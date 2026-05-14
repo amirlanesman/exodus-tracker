@@ -4275,7 +4275,18 @@
 -29.855818,44.057246,20.6
 -29.839103,44.05922,-7.79
 -29.822645,44.063748,0.31
--29.804126,44.067138,-1.7</coordinates>
+-29.804126,44.067138,-1.7
+-29.787605,44.071848,-3.73
+-29.769516,44.075775,-3.73
+-29.751083,44.080538,-3.73
+-29.732136,44.084443,-3.73
+-29.713446,44.087888,0.31
+-29.695036,44.090925,-3.73
+-29.676605,44.094733,-1.7
+-29.658386,44.09779,-3.73
+-29.640533,44.101566,-1.7
+-29.621178,44.103316,0.31
+-29.602038,44.104593,-3.73</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4283,18 +4294,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-14T18:49:00Z</when>
+          <when>2026-05-14T20:39:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212126012</value>
+            <value>212141104</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/14/2026 6:49:00 PM</value>
+            <value>5/14/2026 8:39:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/14/2026 6:49:00 PM</value>
+            <value>5/14/2026 8:39:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4312,16 +4323,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>44.067138</value>
+            <value>44.104593</value>
           </Data>
           <Data name="Longitude">
-            <value>-29.804126</value>
+            <value>-29.602038</value>
           </Data>
           <Data name="Elevation">
-            <value>-1.70 m from MSL</value>
+            <value>-3.73 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>10.1 km/h</value>
+            <value>9.1 km/h</value>
           </Data>
           <Data name="Course">
             <value>90.00 ° True</value>
@@ -4348,7 +4359,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-29.804126,44.067138,-1.7</coordinates>
+          <coordinates>-29.602038,44.104593,-3.73</coordinates>
         </Point>
       </Placemark>
       </Folder>

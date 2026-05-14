@@ -317,7 +317,7 @@
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background: rgba(99, 179, 237, 0.3);
+      background: rgba(99, 179, 237, 0.7);
       animation: markerPulse 2.5s ease-out infinite;
     }
 
@@ -330,7 +330,7 @@
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 14px; height: 14px;
+      width: 18px; height: 18px;
       border-radius: 50%;
       background: var(--accent);
       border: 2.5px solid #fff;
@@ -376,9 +376,9 @@
     /* Course arrow on map */
     .course-arrow-head {
       width: 0; height: 0;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-bottom: 28px solid #ffffff;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 22px solid #ffffff;
       transform-origin: 50% 100%;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.9));
     }
@@ -611,8 +611,8 @@ async function loadKML() {
     const inEmergency = (ext['In Emergency'] || '').toLowerCase() === 'true';
 
     updateDashboard(lat, lon, ts, velocity, course);
-    placeBoatMarker(lat, lon, ts, ext, course, inEmergency);
     updateCourseArrow(lat, lon, course);
+    placeBoatMarker(lat, lon, ts, ext, course, inEmergency);
 
     // Parse & draw historical track from LineString placemarks
     const linePlacemarks = allPlacemarks.filter(p => p.querySelector('LineString'));
@@ -653,22 +653,9 @@ function updateCourseArrow(lat, lon, courseDeg) {
 
   const tip = destinationPoint(lat, lon, courseDeg, COURSE_LINE_KM);
 
-  courseShadow = L.polyline([[lat, lon], tip], {
-    color: '#000000',
-    weight: 4,
-    opacity: 0.7,
-    dashArray: '6 4',
-  }).addTo(windyMap);
-
-  courseLine = L.polyline([[lat, lon], tip], {
-    color: '#ffffff',
-    weight: 2,
-    dashArray: '6 4',
-  }).addTo(windyMap);
-
   const arrowHtml = `<div class="course-arrow-head" style="transform:rotate(${courseDeg}deg)"></div>`;
-  const arrowIcon = L.divIcon({ html: arrowHtml, className: '', iconSize: [24, 28], iconAnchor: [12, 28] });
-  arrowMarker = L.marker(tip, { icon: arrowIcon, interactive: false }).addTo(windyMap);
+  const arrowIcon = L.divIcon({ html: arrowHtml, className: '', iconSize: [18, 22], iconAnchor: [9, 22] });
+  arrowMarker = L.marker([lat, lon], { icon: arrowIcon, interactive: false }).addTo(windyMap);
 }
 
 // ── Historical track from KML LineString ────────
@@ -679,7 +666,7 @@ function drawTrack(points) {
 
   // Outer shadow layer
   trackShadow = L.polyline(points, {
-    color: '#000000',
+    color: '#fff9',
     weight: 6,
     opacity: 0.7,
     lineCap: 'round',
@@ -689,7 +676,7 @@ function drawTrack(points) {
 
   // Main track line
   trackPolyline = L.polyline(points, {
-    color: '#ffffff',
+    color: 'rgba(99,179,237,0.75)',
     weight: 2.5,
     lineCap: 'round',
     lineJoin: 'round',

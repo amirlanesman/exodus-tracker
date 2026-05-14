@@ -1,0 +1,58 @@
+name: Update Vessel Data
+
+on:
+  schedule:
+    # Every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-kml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch latest KML from Garmin inReach
+        run: |
+          curl -fsSL \
+            --max-time 30 \
+            --retry 3 \
+            --retry-delay 5 \
+            -o raw_feed.kml \
+            "https://share.garmin.com/Feed/Share/Exodussail?d1=2026-04-15T00:00z"
+
+      - name: Process and minimize KML
+        run: |
+          python3 process_kml.py raw_feed.kml data.kml
+          echo "Original size: $(wc -c < raw_feed.kml) bytes"
+          echo "Minified size: $(wc -c < data.kml) bytes"
+          rm raw_feed.kml
+
+      - name: Verify KML is valid XML
+        run: |
+          if ! python3 -c "import xml.etree.ElementTree as ET; ET.parse('data.kml')" 2>/dev/null; then
+            echo "::error::Fetched file is not valid XML – aborting commit"
+            exit 1
+          fi
+          echo "KML validation passed ✓"
+          echo "File size: $(wc -c < data.kml) bytes"
+
+      - name: Commit & push updated KML
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data.kml
+
+          # Only commit if the file actually changed
+          if git diff --cached --quiet; then
+            echo "No changes to data.kml – skipping commit"
+          else
+            TIMESTAMP=$(date -u "+%Y-%m-%d %H:%M UTC")
+            git commit -m "chore: update vessel position [${TIMESTAMP}]"
+            git push
+          fi

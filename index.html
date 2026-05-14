@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exodus – Live Sailing Tracker</title>
+  <meta name="description" content="Track sailing vessel Exodus live on an interactive Windy map with real-time Garmin inReach position data." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-card: rgba(10, 14, 26, 0.88);
+      --bg-card-border: rgba(99, 179, 237, 0.18);
+      --accent: #63b3ed;
+      --accent-glow: rgba(99, 179, 237, 0.35);
+      --success: #68d391;
+      --warning: #f6ad55;
+      --danger: #fc8181;
+      --text-primary: #e2e8f0;
+      --text-muted: #718096;
+      --text-mono: #a0aec0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      background: #0a0e1a;
+    }
+
+    #windy {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Dashboard ── */
+    #dashboard {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 1000;
+      width: 300px;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(99, 179, 237, 0.08);
+      border-bottom: 1px solid var(--bg-card-border);
+    }
+
+    .vessel-icon {
+      font-size: 22px;
+      filter: drop-shadow(0 0 6px var(--accent-glow));
+    }
+
+    .vessel-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+    }
+
+    .vessel-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      margin-left: auto;
+      box-shadow: 0 0 8px var(--success);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    .status-dot.stale { background: var(--warning); box-shadow: 0 0 8px var(--warning); }
+    .status-dot.error { background: var(--danger); box-shadow: 0 0 8px var(--danger); animation: none; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .dash-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+
+    .data-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .data-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .data-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .data-value.accent { color: var(--accent); }
+
+    .data-age-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .data-age-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--success), var(--accent));
+      transition: width 1s ease, background 1s ease;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--bg-card-border);
+    }
+
+    /* Layer picker */
+    .layer-picker {
+      display: flex;
+      gap: 6px;
+    }
+
+    .layer-btn {
+      flex: 1;
+      padding: 6px 4px;
+      border-radius: 8px;
+      border: 1px solid var(--bg-card-border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .layer-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .layer-btn.active {
+      background: rgba(99, 179, 237, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* Refresh button */
+    #refresh-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--accent);
+      background: rgba(99, 179, 237, 0.1);
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    #refresh-btn:hover {
+      background: rgba(99, 179, 237, 0.22);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    #refresh-btn:active { transform: scale(0.97); }
+    #refresh-btn.loading { opacity: 0.6; pointer-events: none; }
+    #refresh-btn.loading .btn-icon { animation: spin 1s linear infinite; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error / waiting state */
+    #error-msg {
+      display: none;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(252, 129, 129, 0.1);
+      border: 1px solid rgba(252, 129, 129, 0.3);
+      color: var(--danger);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Custom marker */
+    .boat-marker-wrap {
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+
+    .boat-pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: rgba(99, 179, 237, 0.3);
+      animation: markerPulse 2.5s ease-out infinite;
+    }
+
+    @keyframes markerPulse {
+      0% { transform: scale(0.6); opacity: 0.8; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    .boat-dot {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2.5px solid #fff;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* Leaflet popup override */
+    .leaflet-popup-content-wrapper {
+      background: rgba(10, 14, 26, 0.95) !important;
+      border: 1px solid var(--bg-card-border) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+      backdrop-filter: blur(20px) !important;
+      color: var(--text-primary) !important;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .leaflet-popup-tip { background: rgba(10, 14, 26, 0.95) !important; }
+
+    .popup-inner { padding: 4px 2px; }
+    .popup-title { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .popup-row { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .popup-row span { color: var(--text-primary); font-family: 'JetBrains Mono', monospace; }
+
+    .popup-divider { height: 1px; background: var(--bg-card-border); margin: 8px 0; }
+
+    .popup-toggle {
+      width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--bg-card-border);
+      border-radius: 6px; color: var(--text-muted); font-size: 11px; font-family: 'Inter', sans-serif;
+      padding: 5px 8px; cursor: pointer; text-align: left; transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .popup-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .popup-advanced { display: none; margin-top: 8px; }
+    .popup-advanced.open { display: block; }
+
+    .emergency-badge {
+      display: inline-block; background: rgba(252,129,129,0.2); border: 1px solid var(--danger);
+      color: var(--danger); font-size: 10px; border-radius: 4px; padding: 1px 6px;
+      margin-left: 6px; vertical-align: middle; font-weight: 600;
+    }
+
+    /* Course arrow on map */
+    .course-arrow-head {
+      width: 0; height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 14px solid #ffffff;
+      transform-origin: 50% 100%;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9));
+    }
+
+    /* Two-column data grid in dashboard */
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      #dashboard { width: calc(100vw - 32px); top: 8px; left: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Windy map container -->
+<div id="windy"></div>
+
+<!-- Status Dashboard -->
+<div id="dashboard">
+  <div class="dash-header">
+    <span class="vessel-icon">⛵</span>
+    <div>
+      <div class="vessel-name">Exodus</div>
+      <div class="vessel-sub">Sailing Vessel · Live Track</div>
+    </div>
+    <div class="status-dot" id="status-dot"></div>
+  </div>
+
+  <div class="dash-body">
+
+    <div id="error-msg">⚠️ <span id="error-text">Waiting for signal...</span></div>
+
+    <div class="data-row">
+      <div class="data-label">Position</div>
+      <div class="data-value accent" id="dash-coords">— , —</div>
+    </div>
+
+    <div class="data-grid">
+      <div class="data-row">
+        <div class="data-label">Speed</div>
+        <div class="data-value" id="dash-speed">—</div>
+      </div>
+      <div class="data-row">
+        <div class="data-label">Course</div>
+        <div class="data-value" id="dash-course">—</div>
+      </div>
+    </div>
+
+    <div class="data-row">
+      <div class="data-label">Last Fix</div>
+      <div class="data-value" id="dash-timestamp">—</div>
+    </div>
+
+    <div class="data-row">
+      <div class="data-label">Data Age</div>
+      <div class="data-value" id="dash-age">—</div>
+    </div>
+
+
+
+    <button id="refresh-btn" onclick="loadKML()">
+      <span class="btn-icon">↻</span> Refresh Data
+    </button>
+
+  </div>
+</div>
+
+<!-- Leaflet 1.4.0 — required by Windy API -->
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+<!-- Windy API (loads after Leaflet) -->
+<script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+
+<script>
+// ══════════════════════════════════════════════
+//  CONFIG – replace with your real Windy API key
+// ══════════════════════════════════════════════
+const WINDY_API_KEY = 'HEGeswZSrZhQNFHHbvzZmEb6Uf9pAnMP';
+
+const DEFAULT_CENTER = [25, -40];
+const DEFAULT_ZOOM   = 4;
+const KML_PATH       = './data.kml';
+const COURSE_LINE_KM = 40; // length of course direction line on map
+
+// ── State ───────────────────────────────────────
+let windyMap    = null;
+let boatMarker  = null;
+let arrowMarker = null;   // arrowhead at end of course arrow
+let courseShadow = null;
+let courseLine  = null;   // projected heading line
+let trackShadow = null;
+let trackPolyline = null; // historical sailed track from KML LineString
+let windyStore  = null;
+let lastTimestamp = null;
+
+// ── Windy init ──────────────────────────────────
+windyInit({ key: WINDY_API_KEY, lat: DEFAULT_CENTER[0], lon: DEFAULT_CENTER[1], zoom: DEFAULT_ZOOM },
+  windyAPI => {
+    const { map, store } = windyAPI;
+    windyMap  = map;
+    windyStore = store;
+    store.set('overlay', 'wind');
+    loadKML();
+    setInterval(loadKML, 5 * 60 * 1000);
+  }
+);
+
+// ── Layer switcher ──────────────────────────────
+function setLayer(layer) {
+  if (windyStore) {
+    const allowed = windyStore.getAllowed('overlay');
+    if (!allowed.includes(layer)) {
+      console.warn('[ExodusTracker] Overlay not supported by this API key:', layer);
+      return;
+    }
+    windyStore.set('overlay', layer);
+  }
+  document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-' + layer);
+  if (btn) btn.classList.add('active');
+}
+
+// ── Geo helpers ─────────────────────────────────
+function destinationPoint(lat, lon, bearingDeg, distKm) {
+  const R = 6371, d = distKm / R, brng = bearingDeg * Math.PI / 180;
+  const φ1 = lat * Math.PI / 180, λ1 = lon * Math.PI / 180;
+  const φ2 = Math.asin(Math.sin(φ1)*Math.cos(d) + Math.cos(φ1)*Math.sin(d)*Math.cos(brng));
+  const λ2 = λ1 + Math.atan2(Math.sin(brng)*Math.sin(d)*Math.cos(φ1), Math.cos(d)-Math.sin(φ1)*Math.sin(φ2));
+  return [φ2 * 180/Math.PI, λ2 * 180/Math.PI];
+}
+
+function bearingToCardinal(deg) {
+  const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  return dirs[Math.round(deg / 22.5) % 16];
+}
+
+function parseCourse(str) {
+  // e.g. "45.00 ° True" → 45
+  if (!str) return null;
+  const m = str.match(/[\d.]+/);
+  return m ? parseFloat(m[0]) : null;
+}
+
+function parseKnots(velocityStr) {
+  // e.g. "8.0 km/h" → "4.3 kn (8.0 km/h)"
+  if (!str) return str;
+  const m = velocityStr.match(/([\d.]+)\s*km\/h/i);
+  if (m) {
+    const kn = (parseFloat(m[1]) / 1.852).toFixed(1);
+    return `${kn} kn`;
+  }
+  return velocityStr;
+}
+
+// ── Parse ExtendedData from a Placemark ─────────
+function parseExtendedData(placemark) {
+  const result = {};
+  placemark.querySelectorAll('ExtendedData Data').forEach(d => {
+    const name = d.getAttribute('name');
+    const val  = d.querySelector('value')?.textContent?.trim() || '';
+    if (name) result[name] = val;
+  });
+  return result;
+}
+
+// ── KML fetch & parse ───────────────────────────
+async function loadKML() {
+  const btn = document.getElementById('refresh-btn');
+  btn.classList.add('loading');
+
+  try {
+    const res = await fetch(KML_PATH + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const doc  = new DOMParser().parseFromString(text, 'application/xml');
+
+    // Grab only Point placemarks (ignore LineString track placemarks)
+    const allPlacemarks = Array.from(doc.querySelectorAll('Placemark'));
+    const pointPlacemarks = allPlacemarks.filter(p => p.querySelector('Point'));
+    if (!pointPlacemarks.length) throw new Error('No Point placemarks found');
+
+    // Sort by TimeStamp descending → take newest
+    pointPlacemarks.sort((a, b) => {
+      const ta = a.querySelector('TimeStamp when')?.textContent || '';
+      const tb = b.querySelector('TimeStamp when')?.textContent || '';
+      return tb.localeCompare(ta);
+    });
+    const pm = pointPlacemarks[0];
+
+    // Coordinates
+    const coordStr = pm.querySelector('coordinates')?.textContent?.trim();
+    if (!coordStr) throw new Error('No coordinates');
+    const [lon, lat] = coordStr.split(',').map(Number);
+    if (isNaN(lat) || isNaN(lon)) throw new Error('Invalid coordinates');
+
+    // Timestamp
+    const tsStr = pm.querySelector('TimeStamp when')?.textContent?.trim();
+    const ts    = tsStr ? new Date(tsStr) : new Date();
+    lastTimestamp = ts;
+
+    // ExtendedData fields
+    const ext = parseExtendedData(pm);
+
+    const course  = parseCourse(ext['Course']);
+    const velocity = ext['Velocity'] || null;
+    const inEmergency = (ext['In Emergency'] || '').toLowerCase() === 'true';
+
+    updateDashboard(lat, lon, ts, velocity, course);
+    placeBoatMarker(lat, lon, ts, ext, course, inEmergency);
+    updateCourseArrow(lat, lon, course);
+
+    // Parse & draw historical track from LineString placemarks
+    const linePlacemarks = allPlacemarks.filter(p => p.querySelector('LineString'));
+    if (linePlacemarks.length) {
+      const allCoordStrs = linePlacemarks
+        .map(p => p.querySelector('LineString coordinates')?.textContent?.trim())
+        .filter(Boolean);
+      // Combine all coordinate strings; each entry is "lon,lat,alt" space-separated
+      const trackPoints = [];
+      allCoordStrs.forEach(raw => {
+        raw.split(/\s+/).forEach(token => {
+          const parts = token.split(',').map(Number);
+          if (parts.length >= 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+            trackPoints.push([parts[1], parts[0]]); // Leaflet wants [lat, lon]
+          }
+        });
+      });
+      if (trackPoints.length) drawTrack(trackPoints);
+    }
+
+    if (inEmergency) showEmergency();
+    hideError();
+
+  } catch (err) {
+    console.error('[ExodusTracker]', err);
+    showError('Could not load data: ' + err.message);
+  } finally {
+    btn.classList.remove('loading');
+  }
+}
+
+// ── Course direction arrow on map ───────────────
+function updateCourseArrow(lat, lon, courseDeg) {
+  if (courseShadow) { windyMap.removeLayer(courseShadow); courseShadow = null; }
+  if (courseLine)  { windyMap.removeLayer(courseLine);  courseLine  = null; }
+  if (arrowMarker) { windyMap.removeLayer(arrowMarker); arrowMarker = null; }
+  if (courseDeg === null) return;
+
+  const tip = destinationPoint(lat, lon, courseDeg, COURSE_LINE_KM);
+
+  courseShadow = L.polyline([[lat, lon], tip], {
+    color: '#000000',
+    weight: 4,
+    opacity: 0.7,
+    dashArray: '6 4',
+  }).addTo(windyMap);
+
+  courseLine = L.polyline([[lat, lon], tip], {
+    color: '#ffffff',
+    weight: 2,
+    dashArray: '6 4',
+  }).addTo(windyMap);
+
+  const arrowHtml = `<div class="course-arrow-head" style="transform:rotate(${courseDeg}deg)"></div>`;
+  const arrowIcon = L.divIcon({ html: arrowHtml, className: '', iconSize: [12, 14], iconAnchor: [6, 14] });
+  arrowMarker = L.marker(tip, { icon: arrowIcon, interactive: false }).addTo(windyMap);
+}
+
+// ── Historical track from KML LineString ────────
+function drawTrack(points) {
+  if (trackShadow) { windyMap.removeLayer(trackShadow); trackShadow = null; }
+  if (trackPolyline) { windyMap.removeLayer(trackPolyline); trackPolyline = null; }
+  if (!points || points.length < 2) return;
+
+  // Outer shadow layer
+  trackShadow = L.polyline(points, {
+    color: '#000000',
+    weight: 6,
+    opacity: 0.7,
+    lineCap: 'round',
+    lineJoin: 'round',
+    interactive: false,
+  }).addTo(windyMap);
+
+  // Main track line
+  trackPolyline = L.polyline(points, {
+    color: '#ffffff',
+    weight: 2.5,
+    lineCap: 'round',
+    lineJoin: 'round',
+    dashArray: null,
+  }).addTo(windyMap);
+
+  trackPolyline.bindPopup(
+    `<div class="popup-inner"><div class="popup-title">⛵ Sailed Track</div>` +
+    `<div class="popup-row">Waypoints: <span>${points.length}</span></div>` +
+    `<div class="popup-row">Start: <span>${formatCoords(points[0][0], points[0][1])}</span></div>` +
+    `<div class="popup-row">End: <span>${formatCoords(points[points.length-1][0], points[points.length-1][1])}</span></div></div>`,
+    { maxWidth: 260 }
+  );
+}
+
+// ── Boat marker & popup ─────────────────────────
+function placeBoatMarker(lat, lon, ts, ext, course, inEmergency) {
+  const coordsText = formatCoords(lat, lon);
+  const courseDeg  = course !== null ? course : null;
+  const courseStr  = courseDeg !== null
+    ? `${courseDeg.toFixed(0)}° ${bearingToCardinal(courseDeg)}`
+    : (ext['Course'] || '—');
+  const velocityRaw = ext['Velocity'] || '—';
+  const str = velocityRaw; // pass to parseKnots
+  const speedStr = velocityRaw !== '—' ? (() => {
+    const m = velocityRaw.match(/([\d.]+)\s*km\/h/i);
+    return m ? `${(parseFloat(m[1])/1.852).toFixed(1)} kn (${velocityRaw})` : velocityRaw;
+  })() : '—';
+
+  const emergBadge = inEmergency ? '<span class="emergency-badge">🚨 EMERGENCY</span>' : '';
+  const gpsOk = (ext['Valid GPS Fix'] || '').toLowerCase() === 'true';
+
+  const primaryRows = `
+    <div class="popup-row">📍 Coords: <span>${coordsText}</span></div>
+    <div class="popup-row">⚡ Speed: <span>${speedStr}</span></div>
+    <div class="popup-row">🧭 Course: <span>${courseStr}</span></div>
+    <div class="popup-row">⬆ Elevation: <span>${ext['Elevation'] || '—'}</span></div>
+    <div class="popup-row">📡 GPS: <span style="color:${gpsOk?'#68d391':'#fc8181'}">${gpsOk ? 'Valid Fix' : 'No Fix'}</span></div>
+    <div class="popup-row">🕐 Updated: <span>${ts.toUTCString()}</span></div>
+    ${ext['Event'] ? `<div class="popup-row">📝 Event: <span>${ext['Event']}</span></div>` : ''}
+    ${ext['Text']  ? `<div class="popup-row">💬 Msg: <span>${ext['Text']}</span></div>` : ''}`;
+
+  const advancedRows = `
+    <div class="popup-row">Device: <span>${ext['Device Type'] || '—'}</span></div>
+    <div class="popup-row">IMEI: <span>${ext['IMEI'] || '—'}</span></div>
+    <div class="popup-row">ID: <span>${ext['Id'] || '—'}</span></div>
+    ${ext['Incident Id'] ? `<div class="popup-row">Incident: <span>${ext['Incident Id']}</span></div>` : ''}
+    <div class="popup-row">SRS: <span>${ext['SpatialRefSystem'] || '—'}</span></div>`;
+
+  const uid = 'adv_' + Date.now();
+  const popupContent = `
+    <div class="popup-inner">
+      <div class="popup-title">⛵ ${ext['Map Display Name'] || ext['Name'] || 'Exodus'}${emergBadge}</div>
+      ${primaryRows}
+      <div class="popup-divider"></div>
+      <button class="popup-toggle" onclick="
+        var el=document.getElementById('${uid}');
+        var open=el.classList.toggle('open');
+        this.innerHTML=open?'▾ Hide Details':'▸ Show Device Details';
+      ">▸ Show Device Details</button>
+      <div class="popup-advanced" id="${uid}">${advancedRows}</div>
+    </div>`;
+
+  if (!boatMarker) {
+    const icon = L.divIcon({
+      html: '<div class="boat-marker-wrap"><div class="boat-pulse"></div><div class="boat-dot"></div></div>',
+      className: '', iconSize: [40,40], iconAnchor: [20,20], popupAnchor: [0,-22]
+    });
+    boatMarker = L.marker([lat, lon], { icon }).addTo(windyMap);
+  } else {
+    boatMarker.setLatLng([lat, lon]);
+  }
+  boatMarker.bindPopup(popupContent, { maxWidth: 300 });
+  windyMap.flyTo([lat, lon], Math.max(windyMap.getZoom(), DEFAULT_ZOOM), { duration: 1.4 });
+}
+
+// ── Dashboard ───────────────────────────────────
+function updateDashboard(lat, lon, ts, velocityStr, courseDeg) {
+  document.getElementById('dash-coords').textContent = formatCoords(lat, lon);
+  document.getElementById('dash-timestamp').textContent = ts.toUTCString();
+
+  // Speed: convert km/h → knots
+  let speedLabel = '—';
+  if (velocityStr) {
+    const m = velocityStr.match(/([\d.]+)\s*km\/h/i);
+    speedLabel = m ? `${(parseFloat(m[1])/1.852).toFixed(1)} kn` : velocityStr;
+  }
+  document.getElementById('dash-speed').textContent = speedLabel;
+
+  const courseEl = document.getElementById('dash-course');
+  courseEl.textContent = courseDeg !== null
+    ? `${courseDeg.toFixed(0)}° ${bearingToCardinal(courseDeg)}`
+    : '—';
+
+  updateDataAge(ts);
+}
+
+function updateDataAge(ts) {
+  const ageMs  = Date.now() - ts.getTime();
+  const ageMin = Math.floor(ageMs / 60000);
+  const ageHr  = Math.floor(ageMin / 60);
+  let label;
+  if (ageMin < 60) {
+    label = ageMin <= 1 ? 'Just now' : `${ageMin} min ago`;
+  } else if (ageHr < 24) {
+    label = `${ageHr} hr ${ageMin % 60} min ago`;
+  } else {
+    label = `${Math.floor(ageHr/24)} day(s) ago`;
+  }
+  
+  document.getElementById('dash-age').textContent = label;
+
+  const isGreen = ageMin < 60;
+  const isOrange = ageMin >= 60 && ageMin < 180;
+    
+  document.getElementById('status-dot').className =
+    'status-dot' + (isGreen ? '' : isOrange ? ' stale' : ' error');
+}
+
+setInterval(() => {
+  if (lastTimestamp) updateDataAge(lastTimestamp);
+}, 60000);
+
+// ── Helpers ─────────────────────────────────────
+function formatCoords(lat, lon) {
+  return `${Math.abs(lat).toFixed(4)}°${lat>=0?'N':'S'}, ${Math.abs(lon).toFixed(4)}°${lon>=0?'E':'W'}`;
+}
+
+function showError(msg) {
+  document.getElementById('error-text').textContent = msg;
+  document.getElementById('error-msg').style.display = 'block';
+  document.getElementById('status-dot').className = 'status-dot error';
+}
+
+function hideError() {
+  document.getElementById('error-msg').style.display = 'none';
+}
+
+function showEmergency() {
+  document.getElementById('status-dot').className = 'status-dot error';
+  document.getElementById('error-text').textContent = '🚨 EMERGENCY BEACON ACTIVE';
+  document.getElementById('error-msg').style.display = 'block';
+  document.getElementById('error-msg').style.borderColor = 'rgba(252,129,129,0.8)';
+}
+</script>
+</body>
+</html>

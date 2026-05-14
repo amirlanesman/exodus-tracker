@@ -5,7 +5,7 @@ Live map tracking dashboard designed for Garmin inReach integration, utilizing W
 ## How it works
 
 1. **Frontend App**: `index.html` loads data locally from `data.kml` and plots it over an interactive Windy weather map using Leaflet. 
-2. **Data Automation**: A GitHub Action (`.github/workflows/update_data.yml`) runs every 30 minutes to fetch the latest tracking feed from Garmin MapShare.
+2. **Data Automation**: A GitHub Action (`.github/workflows/update_data.yml`) is triggered externally by [cron-job.org](https://cron-job.org) on a reliable schedule to fetch the latest tracking feed from Garmin MapShare.
 3. **Data Minification**: Garmin feeds grow massively over time because every position update carries an extensive `<ExtendedData>` block. To prevent performance lag and excessive network payload, `process_kml.py` strips out older individual `<Point>` updates while preserving the continuous sailed route `<LineString>` and the most recent `<Point>` for live telemetry.
 
 ## Usage & Development
@@ -44,9 +44,39 @@ To host this tracker online for free:
 4. GitHub will give you a public URL (e.g., `https://username.github.io/exodus-tracker/`) where your map is live.
 
 ### Setting up GitHub Actions (Auto-updater)
-The tracker is configured to automatically download new positions from your Garmin tracker every 30 minutes. To make this work:
+The workflow is triggered via `workflow_dispatch`, meaning it runs on demand rather than on a GitHub-managed cron.
+
 1. Ensure your Garmin MapShare is enabled and the URL in `.github/workflows/update_data.yml` is correct.
 2. Go to your repository **Settings** > **Actions** > **General**.
-3. Scroll down to **Workflow permissions**.
-4. Select **Read and write permissions** and click **Save** (this allows the automated action to commit the updated `data.kml` to your repository).
-5. The action will now run automatically on schedule. You can also trigger it manually from the **Actions** tab by clicking the "Update Vessel Data" workflow and hitting "Run workflow".
+3. Scroll down to **Workflow permissions**, select **Read and write permissions**, and click **Save**.
+
+### Scheduling with cron-job.org
+GitHub's built-in cron scheduler is unreliable and can delay runs by hours under load. [cron-job.org](https://cron-job.org) provides a precise external trigger instead.
+
+**1. Create a GitHub Personal Access Token (PAT)**
+- Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
+- Grant **Actions: Read and write** permission scoped to this repository only
+
+**2. Create a cron job at cron-job.org**
+
+| Field | Value |
+|---|---|
+| URL | `https://api.github.com/repos/amirlanesman/exodus-tracker/actions/workflows/update_data.yml/dispatches` |
+| Method | `POST` |
+| Schedule | Every 30 minutes (or your preferred interval) |
+
+Add these **request headers**:
+```
+Authorization: Bearer YOUR_PAT_TOKEN_HERE
+Accept: application/vnd.github+json
+X-GitHub-Api-Version: 2022-11-28
+Content-Type: application/json
+```
+
+Set the **request body** to:
+```json
+{"ref": "main"}
+```
+
+> A `204 No Content` response from GitHub means the trigger was accepted successfully.
+

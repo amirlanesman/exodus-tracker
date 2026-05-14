@@ -65,7 +65,30 @@
       padding: 14px 16px;
       background: rgba(99, 179, 237, 0.08);
       border-bottom: 1px solid var(--bg-card-border);
+      cursor: pointer;
+      user-select: none;
     }
+    .dash-header:hover { background: rgba(99, 179, 237, 0.13); }
+
+    .dash-collapse-btn {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dash-chevron {
+      font-style: normal;
+      font-size: 0px; 
+      color: var(--text-muted);
+      transition: transform 0.25s ease, font-size 0.15s ease;
+      line-height: 1;
+    }
+    .dash-header:hover .dash-chevron {
+      color: var(--accent);
+      font-size: 17px;
+    }
+    /* Open = arrow up (default). Collapsed = rotate 180deg = arrow down */
+    #dashboard.collapsed .dash-chevron { transform: rotate(180deg); }
 
     .vessel-icon {
       font-size: 22px;
@@ -104,7 +127,20 @@
       50% { opacity: 0.4; }
     }
 
-    .dash-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+    .dash-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+      max-height: 600px; /* large enough for open state */
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    #dashboard.collapsed .dash-body {
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
 
     .data-row {
       display: flex;
@@ -340,11 +376,11 @@
     /* Course arrow on map */
     .course-arrow-head {
       width: 0; height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-bottom: 14px solid #ffffff;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 28px solid #ffffff;
       transform-origin: 50% 100%;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9));
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.9));
     }
 
     /* Two-column data grid in dashboard */
@@ -357,6 +393,9 @@
     /* Mobile */
     @media (max-width: 480px) {
       #dashboard { width: calc(100vw - 32px); top: 8px; left: 8px; }
+      /* Always show chevron on mobile */
+      .dash-chevron { font-size: 14px !important; }
+      .dash-header:hover .dash-chevron { font-size: 16px !important; }
     }
   </style>
 </head>
@@ -367,13 +406,16 @@
 
 <!-- Status Dashboard -->
 <div id="dashboard">
-  <div class="dash-header">
+  <div class="dash-header" onclick="toggleDashboard()" title="Toggle panel">
+    <i class="dash-chevron">▲</i>
     <span class="vessel-icon">⛵</span>
     <div>
       <div class="vessel-name">Exodus</div>
       <div class="vessel-sub">Sailing Vessel · Live Track</div>
     </div>
-    <div class="status-dot" id="status-dot"></div>
+    <div class="dash-collapse-btn">
+      <div class="status-dot" id="status-dot"></div>
+    </div>
   </div>
 
   <div class="dash-body">
@@ -420,6 +462,7 @@
       <div id="links-content">
         <a class="link-item" href="https://exodussail.com/" target="_blank" rel="noopener">⛵ Learn about Exodus</a>
         <a class="link-item" href="https://exodussail.com/support/" target="_blank" rel="noopener">❤️ Support Exodus</a>
+        <a class="link-item" id="windy-link" href="#" target="_blank" rel="noopener" style="display:none">🌬️ Open on Windy</a>
         <a class="link-item" href="https://share.garmin.com/Exodussail" target="_blank" rel="noopener">📡 Garmin Tracker</a>
       </div>
     </div>
@@ -624,7 +667,7 @@ function updateCourseArrow(lat, lon, courseDeg) {
   }).addTo(windyMap);
 
   const arrowHtml = `<div class="course-arrow-head" style="transform:rotate(${courseDeg}deg)"></div>`;
-  const arrowIcon = L.divIcon({ html: arrowHtml, className: '', iconSize: [12, 14], iconAnchor: [6, 14] });
+  const arrowIcon = L.divIcon({ html: arrowHtml, className: '', iconSize: [24, 28], iconAnchor: [12, 28] });
   arrowMarker = L.marker(tip, { icon: arrowIcon, interactive: false }).addTo(windyMap);
 }
 
@@ -664,6 +707,11 @@ function drawTrack(points) {
 
 // ── Boat marker & popup ─────────────────────────
 function placeBoatMarker(lat, lon, ts, ext, course, inEmergency) {
+  // Update Windy link to current position
+  const windyLink = document.getElementById('windy-link');
+  windyLink.href = `https://www.windy.com/${lat.toFixed(3)}/${lon.toFixed(3)}`;
+  windyLink.style.display = '';
+
   const coordsText = formatCoords(lat, lon);
   const courseDeg  = course !== null ? course : null;
   const courseStr  = courseDeg !== null
@@ -776,6 +824,15 @@ function toggleLinks() {
   const isOpen  = content.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
   btn.setAttribute('aria-expanded', isOpen);
+}
+
+function toggleDashboard() {
+  document.getElementById('dashboard').classList.toggle('collapsed');
+}
+
+// Default: collapse panel on mobile
+if (window.matchMedia('(max-width: 480px)').matches) {
+  document.getElementById('dashboard').classList.add('collapsed');
 }
 
 // ── Helpers ─────────────────────────────────────

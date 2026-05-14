@@ -4265,7 +4265,17 @@
 -30.019883,44.025188,0.31
 -30.002868,44.02845,-3.73
 -29.98699,44.032828,-1.7
--29.970831,44.03669,0.31</coordinates>
+-29.970831,44.03669,0.31
+-29.953515,44.040316,0.31
+-29.937315,44.04288,4.37
+-29.922123,44.045198,2.34
+-29.90545,44.049178,4.37
+-29.889378,44.052161,8.43
+-29.872706,44.054521,10.46
+-29.855818,44.057246,20.6
+-29.839103,44.05922,-7.79
+-29.822645,44.063748,0.31
+-29.804126,44.067138,-1.7</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4273,18 +4283,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-14T17:09:00Z</when>
+          <when>2026-05-14T18:49:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212109135</value>
+            <value>212126012</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/14/2026 5:09:00 PM</value>
+            <value>5/14/2026 6:49:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/14/2026 5:09:00 PM</value>
+            <value>5/14/2026 6:49:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4302,19 +4312,19 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>44.036690</value>
+            <value>44.067138</value>
           </Data>
           <Data name="Longitude">
-            <value>-29.970831</value>
+            <value>-29.804126</value>
           </Data>
           <Data name="Elevation">
-            <value>0.31 m from MSL</value>
+            <value>-1.70 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>7.0 km/h</value>
+            <value>10.1 km/h</value>
           </Data>
           <Data name="Course">
-            <value>67.50 ° True</value>
+            <value>90.00 ° True</value>
           </Data>
           <Data name="Valid GPS Fix">
             <value>True</value>
@@ -4338,7 +4348,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-29.970831,44.03669,0.31</coordinates>
+          <coordinates>-29.804126,44.067138,-1.7</coordinates>
         </Point>
       </Placemark>
       </Folder>

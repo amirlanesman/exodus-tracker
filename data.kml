@@ -4421,7 +4421,10 @@
 -27.380891,45.051326,2.34
 -27.35997,45.057388,4.37
 -27.33731,45.061551,6.4
--27.31523,45.064426,6.4</coordinates>
+-27.31523,45.064426,6.4
+-27.292871,45.067388,8.43
+-27.270233,45.070853,10.46
+-27.248518,45.076421,6.4</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4429,18 +4432,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-15T19:09:00Z</when>
+          <when>2026-05-15T19:39:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212359343</value>
+            <value>212364694</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/15/2026 7:09:00 PM</value>
+            <value>5/15/2026 7:39:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/15/2026 7:09:00 PM</value>
+            <value>5/15/2026 7:39:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4458,10 +4461,10 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.064426</value>
+            <value>45.076421</value>
           </Data>
           <Data name="Longitude">
-            <value>-27.315230</value>
+            <value>-27.248518</value>
           </Data>
           <Data name="Elevation">
             <value>6.40 m from MSL</value>
@@ -4494,7 +4497,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-27.31523,45.064426,6.4</coordinates>
+          <coordinates>-27.248518,45.076421,6.4</coordinates>
         </Point>
       </Placemark>
       </Folder>

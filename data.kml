@@ -4348,7 +4348,10 @@
 -28.750533,44.482613,8.43
 -28.741028,44.495648,8.43
 -28.732016,44.508801,14.51
--28.723261,44.52277,16.54</coordinates>
+-28.723261,44.52277,16.54
+-28.715321,44.537265,0.31
+-28.707511,44.551878,0.31
+-28.698928,44.566695,0.31</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4356,18 +4359,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-15T06:59:00Z</when>
+          <when>2026-05-15T07:29:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212218480</value>
+            <value>212223811</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/15/2026 6:59:00 AM</value>
+            <value>5/15/2026 7:29:00 AM</value>
           </Data>
           <Data name="Time">
-            <value>5/15/2026 6:59:00 AM</value>
+            <value>5/15/2026 7:29:00 AM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4385,16 +4388,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>44.522770</value>
+            <value>44.566695</value>
           </Data>
           <Data name="Longitude">
-            <value>-28.723261</value>
+            <value>-28.698928</value>
           </Data>
           <Data name="Elevation">
-            <value>16.54 m from MSL</value>
+            <value>0.31 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>9.1 km/h</value>
+            <value>12.2 km/h</value>
           </Data>
           <Data name="Course">
             <value>22.50 ° True</value>
@@ -4421,7 +4424,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-28.723261,44.52277,16.54</coordinates>
+          <coordinates>-28.698928,44.566695,0.31</coordinates>
         </Point>
       </Placemark>
       </Folder>

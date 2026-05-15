@@ -4424,7 +4424,9 @@
 -27.31523,45.064426,6.4
 -27.292871,45.067388,8.43
 -27.270233,45.070853,10.46
--27.248518,45.076421,6.4</coordinates>
+-27.248518,45.076421,6.4
+-27.226846,45.080938,8.43
+-27.205688,45.08773,8.43</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4432,18 +4434,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-15T19:39:00Z</when>
+          <when>2026-05-15T19:59:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212364694</value>
+            <value>212367252</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/15/2026 7:39:00 PM</value>
+            <value>5/15/2026 7:59:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/15/2026 7:39:00 PM</value>
+            <value>5/15/2026 7:59:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4461,16 +4463,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.076421</value>
+            <value>45.087730</value>
           </Data>
           <Data name="Longitude">
-            <value>-27.248518</value>
+            <value>-27.205688</value>
           </Data>
           <Data name="Elevation">
-            <value>6.40 m from MSL</value>
+            <value>8.43 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>9.1 km/h</value>
+            <value>10.1 km/h</value>
           </Data>
           <Data name="Course">
             <value>67.50 ° True</value>
@@ -4497,7 +4499,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-27.248518,45.076421,6.4</coordinates>
+          <coordinates>-27.205688,45.08773,8.43</coordinates>
         </Point>
       </Placemark>
       </Folder>

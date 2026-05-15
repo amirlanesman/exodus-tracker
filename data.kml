@@ -4432,7 +4432,10 @@
 -27.141595,45.106033,4.37
 -27.120201,45.112201,0.31
 -27.09735,45.115678,2.34
--27.076278,45.121225,0.31</coordinates>
+-27.076278,45.121225,0.31
+-27.056708,45.127651,8.43
+-27.038255,45.13573,-5.76
+-27.019586,45.144066,6.4</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4440,18 +4443,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-15T20:59:00Z</when>
+          <when>2026-05-15T21:29:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212374538</value>
+            <value>212378053</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/15/2026 8:59:00 PM</value>
+            <value>5/15/2026 9:29:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/15/2026 8:59:00 PM</value>
+            <value>5/15/2026 9:29:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4469,16 +4472,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.121225</value>
+            <value>45.144066</value>
           </Data>
           <Data name="Longitude">
-            <value>-27.076278</value>
+            <value>-27.019586</value>
           </Data>
           <Data name="Elevation">
-            <value>0.31 m from MSL</value>
+            <value>6.40 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>10.1 km/h</value>
+            <value>9.1 km/h</value>
           </Data>
           <Data name="Course">
             <value>67.50 ° True</value>
@@ -4505,7 +4508,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-27.076278,45.121225,0.31</coordinates>
+          <coordinates>-27.019586,45.144066,6.4</coordinates>
         </Point>
       </Placemark>
       </Folder>

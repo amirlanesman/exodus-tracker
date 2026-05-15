@@ -4383,7 +4383,11 @@
 -28.229176,44.81615,-1.7
 -28.20566,44.821976,4.37
 -28.182956,44.828123,6.4
--28.15974,44.831288,-5.76</coordinates>
+-28.15974,44.831288,-5.76
+-28.1356,44.834486,2.34
+-28.111931,44.836911,4.37
+-28.08805,44.840913,6.4
+-28.065005,44.84469,6.4</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4391,18 +4395,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-15T12:49:00Z</when>
+          <when>2026-05-15T13:29:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212295816</value>
+            <value>212303149</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/15/2026 12:49:00 PM</value>
+            <value>5/15/2026 1:29:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/15/2026 12:49:00 PM</value>
+            <value>5/15/2026 1:29:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4420,16 +4424,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>44.831288</value>
+            <value>44.844690</value>
           </Data>
           <Data name="Longitude">
-            <value>-28.159740</value>
+            <value>-28.065005</value>
           </Data>
           <Data name="Elevation">
-            <value>-5.76 m from MSL</value>
+            <value>6.40 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>11.1 km/h</value>
+            <value>9.1 km/h</value>
           </Data>
           <Data name="Course">
             <value>90.00 ° True</value>
@@ -4456,7 +4460,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-28.15974,44.831288,-5.76</coordinates>
+          <coordinates>-28.065005,44.84469,6.4</coordinates>
         </Point>
       </Placemark>
       </Folder>

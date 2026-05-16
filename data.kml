@@ -4471,7 +4471,10 @@
 -26.349313,45.409336,4.37
 -26.328628,45.415603,4.37
 -26.30848,45.421611,6.4
--26.288416,45.427866,4.37</coordinates>
+-26.288416,45.427866,4.37
+-26.267108,45.435096,4.37
+-26.245501,45.440515,14.51
+-26.223056,45.448208,4.37</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4479,18 +4482,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-16T03:29:00Z</when>
+          <when>2026-05-16T03:59:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212412257</value>
+            <value>212415081</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/16/2026 3:29:00 AM</value>
+            <value>5/16/2026 3:59:00 AM</value>
           </Data>
           <Data name="Time">
-            <value>5/16/2026 3:29:00 AM</value>
+            <value>5/16/2026 3:59:00 AM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4508,19 +4511,19 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.427866</value>
+            <value>45.448208</value>
           </Data>
           <Data name="Longitude">
-            <value>-26.288416</value>
+            <value>-26.223056</value>
           </Data>
           <Data name="Elevation">
             <value>4.37 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>9.1 km/h</value>
+            <value>14.3 km/h</value>
           </Data>
           <Data name="Course">
-            <value>90.00 ° True</value>
+            <value>67.50 ° True</value>
           </Data>
           <Data name="Valid GPS Fix">
             <value>True</value>
@@ -4544,7 +4547,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-26.288416,45.427866,4.37</coordinates>
+          <coordinates>-26.223056,45.448208,4.37</coordinates>
         </Point>
       </Placemark>
       </Folder>

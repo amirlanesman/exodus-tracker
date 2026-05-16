@@ -4453,7 +4453,10 @@
 -26.721581,45.271568,6.4
 -26.699438,45.281245,4.37
 -26.67738,45.290418,4.37
--26.654613,45.298991,8.43</coordinates>
+-26.654613,45.298991,8.43
+-26.632661,45.30899,4.37
+-26.611161,45.319258,4.37
+-26.588801,45.326918,4.37</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4461,18 +4464,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-16T00:29:00Z</when>
+          <when>2026-05-16T00:59:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212395442</value>
+            <value>212398149</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/16/2026 12:29:00 AM</value>
+            <value>5/16/2026 12:59:00 AM</value>
           </Data>
           <Data name="Time">
-            <value>5/16/2026 12:29:00 AM</value>
+            <value>5/16/2026 12:59:00 AM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4490,19 +4493,19 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.298991</value>
+            <value>45.326918</value>
           </Data>
           <Data name="Longitude">
-            <value>-26.654613</value>
+            <value>-26.588801</value>
           </Data>
           <Data name="Elevation">
-            <value>8.43 m from MSL</value>
+            <value>4.37 m from MSL</value>
           </Data>
           <Data name="Velocity">
             <value>13.2 km/h</value>
           </Data>
           <Data name="Course">
-            <value>45.00 ° True</value>
+            <value>67.50 ° True</value>
           </Data>
           <Data name="Valid GPS Fix">
             <value>True</value>
@@ -4526,7 +4529,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-26.654613,45.298991,8.43</coordinates>
+          <coordinates>-26.588801,45.326918,4.37</coordinates>
         </Point>
       </Placemark>
       </Folder>

@@ -4483,7 +4483,10 @@
 -26.095361,45.481703,4.37
 -26.072186,45.487443,4.37
 -26.048885,45.492668,4.37
--26.025151,45.498043,4.37</coordinates>
+-26.025151,45.498043,4.37
+-26.00084,45.502978,6.4
+-25.9767,45.510306,4.37
+-25.953226,45.518375,4.37</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4491,18 +4494,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-16T05:29:00Z</when>
+          <when>2026-05-16T05:59:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212425854</value>
+            <value>212429770</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/16/2026 5:29:00 AM</value>
+            <value>5/16/2026 5:59:00 AM</value>
           </Data>
           <Data name="Time">
-            <value>5/16/2026 5:29:00 AM</value>
+            <value>5/16/2026 5:59:00 AM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4520,19 +4523,19 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.498043</value>
+            <value>45.518375</value>
           </Data>
           <Data name="Longitude">
-            <value>-26.025151</value>
+            <value>-25.953226</value>
           </Data>
           <Data name="Elevation">
             <value>4.37 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>11.1 km/h</value>
+            <value>12.2 km/h</value>
           </Data>
           <Data name="Course">
-            <value>90.00 ° True</value>
+            <value>67.50 ° True</value>
           </Data>
           <Data name="Valid GPS Fix">
             <value>True</value>
@@ -4556,7 +4559,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-26.025151,45.498043,4.37</coordinates>
+          <coordinates>-25.953226,45.518375,4.37</coordinates>
         </Point>
       </Placemark>
       </Folder>

@@ -4477,7 +4477,10 @@
 -26.223056,45.448208,4.37
 -26.20132,45.45604,4.37
 -26.179668,45.463883,4.37
--26.158296,45.469751,4.37</coordinates>
+-26.158296,45.469751,4.37
+-26.137655,45.47371,2.34
+-26.116283,45.477851,4.37
+-26.095361,45.481703,4.37</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4485,18 +4488,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-16T04:29:00Z</when>
+          <when>2026-05-16T04:59:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212418359</value>
+            <value>212421874</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/16/2026 4:29:00 AM</value>
+            <value>5/16/2026 4:59:00 AM</value>
           </Data>
           <Data name="Time">
-            <value>5/16/2026 4:29:00 AM</value>
+            <value>5/16/2026 4:59:00 AM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4514,10 +4517,10 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.469751</value>
+            <value>45.481703</value>
           </Data>
           <Data name="Longitude">
-            <value>-26.158296</value>
+            <value>-26.095361</value>
           </Data>
           <Data name="Elevation">
             <value>4.37 m from MSL</value>
@@ -4526,7 +4529,7 @@
             <value>10.1 km/h</value>
           </Data>
           <Data name="Course">
-            <value>67.50 ° True</value>
+            <value>90.00 ° True</value>
           </Data>
           <Data name="Valid GPS Fix">
             <value>True</value>
@@ -4550,7 +4553,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-26.158296,45.469751,4.37</coordinates>
+          <coordinates>-26.095361,45.481703,4.37</coordinates>
         </Point>
       </Placemark>
       </Folder>

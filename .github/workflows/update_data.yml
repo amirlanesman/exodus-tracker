@@ -1,6 +1,9 @@
 name: Update Vessel Data
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch: # Triggered externally by cron-job.org
 
 permissions:

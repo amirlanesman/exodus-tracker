@@ -214,72 +214,145 @@
       box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    /* Refresh button */
-    #refresh-btn {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
+    /* Mini Refresh button */
+    #mini-refresh-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 28px;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, transform 0.2s;
+    }
+    #mini-refresh-btn:hover {
+      color: var(--accent);
+    }
+    #mini-refresh-btn:active { transform: scale(0.9); }
+    #mini-refresh-btn.loading { opacity: 0.6; pointer-events: none; }
+    #mini-refresh-btn.loading .btn-icon { animation: spin 1s linear infinite; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Links & Radius boxes */
+    .collapse-box {
       border: 1px solid var(--accent);
+      border-radius: 10px;
       background: rgba(99, 179, 237, 0.1);
+      overflow: hidden;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+    .collapse-box:hover {
+      background: rgba(99, 179, 237, 0.22);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+    .collapse-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: transparent;
+      border: none;
       color: var(--accent);
       font-family: 'Inter', sans-serif;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    #refresh-btn:hover {
-      background: rgba(99, 179, 237, 0.22);
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
-
-    #refresh-btn:active { transform: scale(0.97); }
-    #refresh-btn.loading { opacity: 0.6; pointer-events: none; }
-    #refresh-btn.loading .btn-icon { animation: spin 1s linear infinite; }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Links box */
-    #links-box {
-      border: 1px solid var(--bg-card-border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    #links-toggle {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 9px 12px;
-      background: rgba(255,255,255,0.04);
-      border: none;
-      color: var(--text-muted);
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
       transition: color 0.2s;
     }
-    #links-toggle:hover { color: var(--accent); }
-    #links-toggle .chevron {
+    .collapse-toggle:hover { color: #fff; }
+    .collapse-toggle .chevron {
       transition: transform 0.25s ease;
       font-style: normal;
       font-size: 10px;
     }
-    #links-toggle.open .chevron { transform: rotate(180deg); }
-    #links-content {
+    .collapse-toggle.open .chevron { transform: rotate(180deg); }
+    .collapse-content {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
-    #links-content.open { max-height: 200px; }
+    .collapse-content.open { max-height: 200px; }
+
+    /* Radius inputs in popup */
+    .radius-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .radius-inputs label {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      font-size: 10px;
+      color: var(--text-muted);
+      gap: 6px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .radius-inputs label span {
+      margin-top: auto;
+    }
+    .radius-inputs input {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 6px;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .radius-inputs input:focus { 
+      outline: none; 
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.3);
+    }
+    
+    /* Hide number input spinners */
+    .radius-inputs input[type="number"]::-webkit-inner-spin-button,
+    .radius-inputs input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .radius-inputs input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .radius-label {
+      background: transparent;
+      color: #fffb;
+      border: 1px solid transparent;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      text-shadow: 0 0 4px rgba(0,0,0,0.8);
+      cursor: pointer;
+      box-shadow: none;
+      transition: all 0.2s ease;
+      transform-origin: center;
+    }
+    .radius-label:hover {
+      background: rgba(99, 179, 237, 0.3);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transform: scale(1.15);
+    }
+
     .link-item {
       display: block;
       padding: 8px 12px;
@@ -422,9 +495,14 @@
 
     <div id="error-msg">⚠️ <span id="error-text">Waiting for signal...</span></div>
 
-    <div class="data-row">
-      <div class="data-label">Position</div>
-      <div class="data-value accent" id="dash-coords">— , —</div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div class="data-row">
+        <div class="data-label">Position</div>
+        <div class="data-value" id="dash-coords">— , —</div>
+      </div>
+      <button id="mini-refresh-btn" onclick="loadKML();" title="Refresh Data" style="margin-bottom: 2px;">
+        <span class="btn-icon">↻</span>
+      </button>
     </div>
 
     <div class="data-grid">
@@ -436,30 +514,29 @@
         <div class="data-label">Course</div>
         <div class="data-value" id="dash-course">—</div>
       </div>
+      <div class="data-row" id="row-speed-1hr" style="display:none">
+        <div class="data-label">1hr Avg</div>
+        <div class="data-value" id="dash-speed-1hr">—</div>
+      </div>
+      <div class="data-row" id="row-speed-24hr" style="display:none">
+        <div class="data-label">24hr Avg</div>
+        <div class="data-value" id="dash-speed-24hr">—</div>
+      </div>
     </div>
 
-    <div class="data-row">
-      <div class="data-label">Last Fix</div>
-      <div class="data-value" id="dash-timestamp">—</div>
-    </div>
-
-    <div class="data-row">
+    <div class="data-row" id="dash-age-row" title="Hover for exact timestamp" style="cursor: help;">
       <div class="data-label">Data Age</div>
       <div class="data-value" id="dash-age">—</div>
     </div>
 
 
 
-    <button id="refresh-btn" onclick="loadKML()">
-      <span class="btn-icon">↻</span> Refresh Data
-    </button>
-
-    <div id="links-box">
-      <button id="links-toggle" onclick="toggleLinks()" aria-expanded="false">
+    <div class="collapse-box" id="links-box">
+      <button class="collapse-toggle" id="links-toggle" onclick="toggleLinks()" aria-expanded="false">
         🔗 Links
         <i class="chevron">▾</i>
       </button>
-      <div id="links-content">
+      <div class="collapse-content" id="links-content">
         <a class="link-item" href="https://exodussail.com/" target="_blank" rel="noopener">⛵ Learn about Exodus</a>
         <a class="link-item" href="https://exodussail.com/support/" target="_blank" rel="noopener">❤️ Support Exodus</a>
         <a class="link-item" id="windy-link" href="#" target="_blank" rel="noopener" style="display:none">🌬️ Open on Windy</a>
@@ -476,11 +553,18 @@
 <!-- Windy API (loads after Leaflet) -->
 <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
 
+<!-- Local secrets (ignored in git) -->
+<script src="config.local.js"></script>
+
 <script>
 // ══════════════════════════════════════════════
-//  CONFIG – replace with your real Windy API key
+//  CONFIG
 // ══════════════════════════════════════════════
-const WINDY_API_KEY = 'HEGeswZSrZhQNFHHbvzZmEb6Uf9pAnMP';
+let WINDY_API_KEY = 'HEGeswZSrZhQNFHHbvzZmEb6Uf9pAnMP'; // Production key (GitHub Pages)
+
+if (typeof LOCAL_WINDY_API_KEY !== 'undefined') {
+  WINDY_API_KEY = LOCAL_WINDY_API_KEY; // Override with local secret key
+}
 
 const DEFAULT_CENTER = [25, -40];
 const DEFAULT_ZOOM   = 4;
@@ -495,8 +579,17 @@ let courseShadow = null;
 let courseLine  = null;   // projected heading line
 let trackShadow = null;
 let trackPolyline = null; // historical sailed track from KML LineString
+let radiusCircle = null;  // 24hr travel estimate circle
+let radiusLabelMarker = null; // Label attached to the circle
+let radiusSpeed = -1;     // -1 means uninitialized
+let radiusTime = 24;
+let radiusDist = 0;
+let userEditedRadius = false;
 let windyStore  = null;
 let lastTimestamp = null;
+let currentLat = null;
+let currentLon = null;
+let currentSpeedKnots = 0;
 
 // ── Windy init ──────────────────────────────────
 windyInit({ key: WINDY_API_KEY, lat: DEFAULT_CENTER[0], lon: DEFAULT_CENTER[1], zoom: DEFAULT_ZOOM },
@@ -570,8 +663,8 @@ function parseExtendedData(placemark) {
 
 // ── KML fetch & parse ───────────────────────────
 async function loadKML() {
-  const btn = document.getElementById('refresh-btn');
-  btn.classList.add('loading');
+  const btn = document.getElementById('mini-refresh-btn');
+  if (btn) btn.classList.add('loading');
 
   try {
     const res = await fetch(KML_PATH + '?t=' + Date.now());
@@ -607,10 +700,9 @@ async function loadKML() {
     const ext = parseExtendedData(pm);
 
     const course  = parseCourse(ext['Course']);
-    const velocity = ext['Velocity'] || null;
     const inEmergency = (ext['In Emergency'] || '').toLowerCase() === 'true';
 
-    updateDashboard(lat, lon, ts, velocity, course);
+    updateDashboard(lat, lon, ts, ext, course);
     updateCourseArrow(lat, lon, course);
     placeBoatMarker(lat, lon, ts, ext, course, inEmergency);
 
@@ -640,7 +732,7 @@ async function loadKML() {
     console.error('[ExodusTracker]', err);
     showError('Could not load data: ' + err.message);
   } finally {
-    btn.classList.remove('loading');
+    if (btn) btn.classList.remove('loading');
   }
 }
 
@@ -705,18 +797,28 @@ function placeBoatMarker(lat, lon, ts, ext, course, inEmergency) {
     ? `${courseDeg.toFixed(0)}° ${bearingToCardinal(courseDeg)}`
     : (ext['Course'] || '—');
   const velocityRaw = ext['Velocity'] || '—';
-  const str = velocityRaw; // pass to parseKnots
-  const speedStr = velocityRaw !== '—' ? (() => {
-    const m = velocityRaw.match(/([\d.]+)\s*km\/h/i);
-    return m ? `${(parseFloat(m[1])/1.852).toFixed(1)} kn (${velocityRaw})` : velocityRaw;
-  })() : '—';
+  
+  // Set globals for Radius calculation
+  currentLat = lat;
+  currentLon = lon;
+  const matchKnots = velocityRaw.match(/([\d.]+)\s*km\/h/i);
+  currentSpeedKnots = matchKnots ? parseFloat(matchKnots[1]) / 1.852 : 0;
+  
+  const speedStr = matchKnots 
+    ? `${currentSpeedKnots.toFixed(1)} kn (${velocityRaw})` 
+    : velocityRaw;
 
   const emergBadge = inEmergency ? '<span class="emergency-badge">🚨 EMERGENCY</span>' : '';
   const gpsOk = (ext['Valid GPS Fix'] || '').toLowerCase() === 'true';
 
+  const speed1hrRow = ext['Speed 1hr'] ? `<div class="popup-row">⏱️ 1hr Avg: <span>${ext['Speed 1hr']}</span></div>` : '';
+  const speed24hrRow = ext['Speed 24hr'] ? `<div class="popup-row">⏱️ 24hr Avg: <span>${ext['Speed 24hr']}</span></div>` : '';
+
   const primaryRows = `
     <div class="popup-row">📍 Coords: <span>${coordsText}</span></div>
     <div class="popup-row">⚡ Speed: <span>${speedStr}</span></div>
+    ${speed1hrRow}
+    ${speed24hrRow}
     <div class="popup-row">🧭 Course: <span>${courseStr}</span></div>
     <div class="popup-row">⬆ Elevation: <span>${ext['Elevation'] || '—'}</span></div>
     <div class="popup-row">📡 GPS: <span style="color:${gpsOk?'#68d391':'#fc8181'}">${gpsOk ? 'Valid Fix' : 'No Fix'}</span></div>
@@ -756,15 +858,18 @@ function placeBoatMarker(lat, lon, ts, ext, course, inEmergency) {
   }
   boatMarker.bindPopup(popupContent, { maxWidth: 300 });
   windyMap.flyTo([lat, lon], Math.max(windyMap.getZoom(), DEFAULT_ZOOM), { duration: 1.4 });
+
+  initRadius(ext);
 }
 
 // ── Dashboard ───────────────────────────────────
-function updateDashboard(lat, lon, ts, velocityStr, courseDeg) {
+function updateDashboard(lat, lon, ts, ext, courseDeg) {
   document.getElementById('dash-coords').textContent = formatCoords(lat, lon);
-  document.getElementById('dash-timestamp').textContent = ts.toUTCString();
+  document.getElementById('dash-age-row').title = `Last Fix: ${ts.toUTCString()}`;
 
   // Speed: convert km/h → knots
   let speedLabel = '—';
+  const velocityStr = ext['Velocity'] || null;
   if (velocityStr) {
     const m = velocityStr.match(/([\d.]+)\s*km\/h/i);
     speedLabel = m ? `${(parseFloat(m[1])/1.852).toFixed(1)} kn` : velocityStr;
@@ -775,6 +880,22 @@ function updateDashboard(lat, lon, ts, velocityStr, courseDeg) {
   courseEl.textContent = courseDeg !== null
     ? `${courseDeg.toFixed(0)}° ${bearingToCardinal(courseDeg)}`
     : '—';
+    
+  const speed1hrRow = document.getElementById('row-speed-1hr');
+  if (ext['Speed 1hr']) {
+    document.getElementById('dash-speed-1hr').textContent = ext['Speed 1hr'];
+    speed1hrRow.style.display = 'flex';
+  } else {
+    speed1hrRow.style.display = 'none';
+  }
+
+  const speed24hrRow = document.getElementById('row-speed-24hr');
+  if (ext['Speed 24hr']) {
+    document.getElementById('dash-speed-24hr').textContent = ext['Speed 24hr'];
+    speed24hrRow.style.display = 'flex';
+  } else {
+    speed24hrRow.style.display = 'none';
+  }
 
   updateDataAge(ts);
 }
@@ -811,6 +932,111 @@ function toggleLinks() {
   const isOpen  = content.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
   btn.setAttribute('aria-expanded', isOpen);
+}
+
+// ── Travel Radius Logic ─────────────────────────
+function initRadius(ext) {
+  if (!userEditedRadius) {
+    let speedToUse = currentSpeedKnots;
+    if (ext && ext['Speed 1hr']) {
+      const match1hr = ext['Speed 1hr'].match(/([\d.]+)\s*kn/i);
+      if (match1hr) speedToUse = parseFloat(match1hr[1]);
+    }
+    
+    if (speedToUse > 0) {
+      radiusSpeed = speedToUse;
+      radiusDist = radiusSpeed * radiusTime;
+    }
+  }
+  drawRadius();
+}
+
+function updateRadiusFromSpeed() {
+  userEditedRadius = true;
+  radiusSpeed = parseFloat(document.getElementById('popup-radius-speed').value) || 0;
+  radiusTime = parseFloat(document.getElementById('popup-radius-time').value) || 0;
+  radiusDist = radiusSpeed * radiusTime;
+  document.getElementById('popup-radius-dist').value = radiusDist.toFixed(1);
+  drawRadius();
+}
+
+function updateRadiusFromTime() {
+  userEditedRadius = true;
+  radiusSpeed = parseFloat(document.getElementById('popup-radius-speed').value) || 0;
+  radiusTime = parseFloat(document.getElementById('popup-radius-time').value) || 0;
+  radiusDist = radiusSpeed * radiusTime;
+  document.getElementById('popup-radius-dist').value = radiusDist.toFixed(1);
+  drawRadius();
+}
+
+function updateRadiusFromDist() {
+  userEditedRadius = true;
+  radiusDist = parseFloat(document.getElementById('popup-radius-dist').value) || 0;
+  radiusTime = parseFloat(document.getElementById('popup-radius-time').value) || 24;
+  if (radiusTime > 0) {
+    radiusSpeed = radiusDist / radiusTime;
+    document.getElementById('popup-radius-speed').value = radiusSpeed.toFixed(1);
+  }
+  drawRadius();
+}
+
+function drawRadius() {
+  if (currentLat === null || currentLon === null || !windyMap) return;
+  const distMeters = radiusDist * 1852; // 1 NM = 1852 meters
+  
+  // 1. Draw/Update Circle
+  if (!radiusCircle) {
+    radiusCircle = L.circle([currentLat, currentLon], {
+      color: 'rgba(99, 179, 237, 0.8)',
+      fillColor: 'rgba(99, 179, 237, 0.16)',
+      fillOpacity: 0.5,
+      weight: 4,
+      dashArray: '4 6',
+      radius: distMeters,
+      interactive: false
+    }).addTo(windyMap);
+  }
+  radiusCircle.setLatLng([currentLat, currentLon]);
+  radiusCircle.setRadius(distMeters);
+  
+  // 2. Draw/Update Label Marker
+  const topPos = destinationPoint(currentLat, currentLon, 0, distMeters / 1000);
+  const labelText = `${radiusDist.toFixed(1)} nm (${radiusTime}h @ ${radiusSpeed.toFixed(1)}kn)`;
+  
+  function getRadiusPopupHtml() {
+    return `
+      <div class="popup-inner">
+        <div class="popup-title">⭕ Est. Travel Radius</div>
+        <div class="radius-inputs">
+          <label><span>Speed (kn)</span><input type="number" id="popup-radius-speed" step="0.1" value="${radiusSpeed.toFixed(1)}" oninput="updateRadiusFromSpeed()"></label>
+          <label><span>Time (hr)</span><input type="number" id="popup-radius-time" step="1" value="${radiusTime}" oninput="updateRadiusFromTime()"></label>
+          <label><span>Dist (nm)</span><input type="number" id="popup-radius-dist" step="1" value="${radiusDist.toFixed(1)}" oninput="updateRadiusFromDist()"></label>
+        </div>
+      </div>
+    `;
+  }
+
+  if (!radiusLabelMarker) {
+    const icon = L.divIcon({ 
+      html: `<div class="radius-label">${labelText}</div>`, 
+      className: '', iconSize: [140, 24], iconAnchor: [70, 24] 
+    });
+    radiusLabelMarker = L.marker(topPos, { icon }).addTo(windyMap);
+    radiusLabelMarker.bindPopup(getRadiusPopupHtml(), { maxWidth: 280, closeButton: false });
+    radiusLabelMarker.on('popupclose', () => {
+      radiusLabelMarker.setPopupContent(getRadiusPopupHtml());
+    });
+  } else {
+    radiusLabelMarker.setLatLng(topPos);
+    // Update text dynamically to avoid focus loss
+    const labelEl = radiusLabelMarker.getElement()?.querySelector('.radius-label');
+    if (labelEl) labelEl.textContent = labelText;
+    
+    // Only replace popup HTML entirely if it's closed, otherwise inputs lose focus while typing
+    if (!radiusLabelMarker.isPopupOpen()) {
+      radiusLabelMarker.setPopupContent(getRadiusPopupHtml());
+    }
+  }
 }
 
 function toggleDashboard() {

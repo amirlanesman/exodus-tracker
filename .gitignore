@@ -22,3 +22,4 @@ __pycache__/
 feed*.kml
 raw_feed.kml
 test.kml
+config.local.js

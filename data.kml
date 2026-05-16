@@ -4518,7 +4518,8 @@
 -25.368568,45.646455,42.95
 -25.348806,45.646991,-13.87
 -25.330631,45.649341,-28.05
--25.312736,45.651133,26.7</coordinates>
+-25.312736,45.651133,26.7
+-25.295376,45.652591,26.7</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4526,18 +4527,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-16T11:19:30Z</when>
+          <when>2026-05-16T11:29:30Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>212490846</value>
+            <value>212492792</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/16/2026 11:19:30 AM</value>
+            <value>5/16/2026 11:29:30 AM</value>
           </Data>
           <Data name="Time">
-            <value>5/16/2026 11:19:30 AM</value>
+            <value>5/16/2026 11:29:30 AM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4555,16 +4556,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>45.651133</value>
+            <value>45.652591</value>
           </Data>
           <Data name="Longitude">
-            <value>-25.312736</value>
+            <value>-25.295376</value>
           </Data>
           <Data name="Elevation">
             <value>26.70 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>8.0 km/h</value>
+            <value>10.1 km/h</value>
           </Data>
           <Data name="Course">
             <value>90.00 ° True</value>
@@ -4591,7 +4592,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-25.312736,45.651133,26.7</coordinates>
+          <coordinates>-25.295376,45.652591,26.7</coordinates>
         </Point>
       </Placemark>
       </Folder>

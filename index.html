@@ -605,7 +605,7 @@ windyInit({ key: WINDY_API_KEY, lat: DEFAULT_CENTER[0], lon: DEFAULT_CENTER[1], 
       if (!lastTimestamp || !syncRadiusWithMap) return;
       const diffMs = ts - lastTimestamp.getTime();
       let hrs = diffMs / (1000 * 60 * 60);
-      if (hrs < 1) hrs = 1; // Don't allow negative radius
+      if (hrs < 1) hrs = 24; // Don't allow negative radius
       
       // Update global radius time
       radiusTime = Math.round(hrs);

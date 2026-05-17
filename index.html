@@ -598,6 +598,31 @@ windyInit({ key: WINDY_API_KEY, lat: DEFAULT_CENTER[0], lon: DEFAULT_CENTER[1], 
     windyMap  = map;
     windyStore = store;
     store.set('overlay', 'wind');
+    
+    // Sync radius circle with Windy's timeline slider
+    store.on('timestamp', (ts) => {
+      if (!lastTimestamp) return;
+      const diffMs = ts - lastTimestamp.getTime();
+      let hrs = diffMs / (1000 * 60 * 60);
+      if (hrs < 1) hrs = 1; // Don't allow negative radius
+      
+      // Update global radius time
+      radiusTime = Math.round(hrs);
+      
+      if (radiusSpeed > 0) {
+        radiusDist = radiusSpeed * radiusTime;
+        drawRadius();
+        
+        // If popup is open, update the inputs live so they don't get out of sync
+        if (radiusLabelMarker && radiusLabelMarker.isPopupOpen()) {
+          const timeInput = document.getElementById('popup-radius-time');
+          const distInput = document.getElementById('popup-radius-dist');
+          if (timeInput) timeInput.value = radiusTime;
+          if (distInput) distInput.value = radiusDist.toFixed(1);
+        }
+      }
+    });
+
     loadKML();
     setInterval(loadKML, 5 * 60 * 1000);
   }
@@ -935,6 +960,19 @@ function toggleLinks() {
 }
 
 // ── Travel Radius Logic ─────────────────────────
+function getRadiusPopupHtml() {
+  return `
+    <div class="popup-inner">
+      <div class="popup-title">⭕ Est. Travel Radius</div>
+      <div class="radius-inputs">
+        <label><span>Speed (kn)</span><input type="number" id="popup-radius-speed" step="0.1" value="${radiusSpeed.toFixed(1)}" oninput="updateRadiusFromSpeed()"></label>
+        <label><span>Time (hr)</span><input type="number" id="popup-radius-time" step="1" value="${radiusTime}" oninput="updateRadiusFromTime()"></label>
+        <label><span>Dist (nm)</span><input type="number" id="popup-radius-dist" step="1" value="${radiusDist.toFixed(1)}" oninput="updateRadiusFromDist()"></label>
+      </div>
+    </div>
+  `;
+}
+
 function initRadius(ext) {
   if (!userEditedRadius) {
     let speedToUse = currentSpeedKnots;
@@ -1002,19 +1040,6 @@ function drawRadius() {
   // 2. Draw/Update Label Marker
   const topPos = destinationPoint(currentLat, currentLon, 0, distMeters / 1000);
   const labelText = `${radiusDist.toFixed(1)} nm (${radiusTime}h @ ${radiusSpeed.toFixed(1)}kn)`;
-  
-  function getRadiusPopupHtml() {
-    return `
-      <div class="popup-inner">
-        <div class="popup-title">⭕ Est. Travel Radius</div>
-        <div class="radius-inputs">
-          <label><span>Speed (kn)</span><input type="number" id="popup-radius-speed" step="0.1" value="${radiusSpeed.toFixed(1)}" oninput="updateRadiusFromSpeed()"></label>
-          <label><span>Time (hr)</span><input type="number" id="popup-radius-time" step="1" value="${radiusTime}" oninput="updateRadiusFromTime()"></label>
-          <label><span>Dist (nm)</span><input type="number" id="popup-radius-dist" step="1" value="${radiusDist.toFixed(1)}" oninput="updateRadiusFromDist()"></label>
-        </div>
-      </div>
-    `;
-  }
 
   if (!radiusLabelMarker) {
     const icon = L.divIcon({ 

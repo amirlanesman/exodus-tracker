@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'data.kml'
   workflow_dispatch: # Triggered externally by cron-job.org
 
 permissions:

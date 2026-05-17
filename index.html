@@ -773,7 +773,7 @@ function updateCourseArrow(lat, lon, courseDeg) {
 
   const arrowHtml = `<div class="course-arrow-head" style="transform:rotate(${courseDeg}deg)"></div>`;
   const arrowIcon = L.divIcon({ html: arrowHtml, className: '', iconSize: [18, 22], iconAnchor: [9, 22] });
-  arrowMarker = L.marker([lat, lon], { icon: arrowIcon, interactive: false }).addTo(windyMap);
+  arrowMarker = L.marker([lat, lon], { icon: arrowIcon, interactive: false, zIndexOffset: -1000 }).addTo(windyMap);
 }
 
 // ── Historical track from KML LineString ────────
@@ -878,7 +878,7 @@ function placeBoatMarker(lat, lon, ts, ext, course, inEmergency) {
       html: '<div class="boat-marker-wrap"><div class="boat-pulse"></div><div class="boat-dot"></div></div>',
       className: '', iconSize: [40,40], iconAnchor: [20,20], popupAnchor: [0,-22]
     });
-    boatMarker = L.marker([lat, lon], { icon }).addTo(windyMap);
+    boatMarker = L.marker([lat, lon], { icon, zIndexOffset: 1000 }).addTo(windyMap);
   } else {
     boatMarker.setLatLng([lat, lon]);
   }

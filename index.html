@@ -970,9 +970,9 @@ function getRadiusPopupHtml() {
         <label><span>Time (hr)</span><input type="number" id="popup-radius-time" step="1" value="${radiusTime}" oninput="updateRadiusFromTime()"></label>
         <label><span>Dist (nm)</span><input type="number" id="popup-radius-dist" step="1" value="${radiusDist.toFixed(1)}" oninput="updateRadiusFromDist()"></label>
         <div style="grid-column: 1 / -1; margin-top: 6px;">
-          <label style="flex-direction: row; align-items: center; justify-content: center; text-transform: none; font-size: 11px; font-weight: normal; letter-spacing: normal; cursor: pointer; color: var(--text-muted);">
+          <label title="Automatically adjust the travel radius time to match the time selected in the map's forecast slider" style="flex-direction: row; align-items: center; justify-content: center; text-transform: none; font-size: 11px; font-weight: normal; letter-spacing: normal; cursor: pointer; color: var(--text-muted);">
             <input type="checkbox" id="popup-radius-sync" onchange="toggleRadiusSync(this.checked)" ${syncRadiusWithMap ? 'checked' : ''} style="margin: 0; width: 14px; height: 14px; accent-color: var(--accent);">
-            <span style="margin-left: 6px; flex: none;">Lock time to map forecast</span>
+            <span style="margin-left: 6px; flex: none;">Sync range with forecast</span>
           </label>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <name>KML Export 5/18/2026 11:00:20 PM</name>
+    <name>KML Export 5/18/2026 11:30:17 PM</name>
     <Style id="style_emergency">
       <IconStyle>
         <colorMode>normal</colorMode>
@@ -4876,7 +4876,9 @@
 -17.035266,46.166771,4.37
 -17.010076,46.165978,-1.7
 -16.984498,46.165751,-3.73
--16.960123,46.165205,-3.73</coordinates>
+-16.960123,46.165205,-3.73
+-16.936003,46.163413,4.37
+-16.912271,46.162738,8.43</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -4884,18 +4886,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-18T23:00:00Z</when>
+          <when>2026-05-18T23:20:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>213050480</value>
+            <value>213052528</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/18/2026 11:00:00 PM</value>
+            <value>5/18/2026 11:20:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/18/2026 11:00:00 PM</value>
+            <value>5/18/2026 11:20:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -4913,19 +4915,19 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>46.165205</value>
+            <value>46.162738</value>
           </Data>
           <Data name="Longitude">
-            <value>-16.960123</value>
+            <value>-16.912271</value>
           </Data>
           <Data name="Elevation">
-            <value>-3.73 m from MSL</value>
+            <value>8.43 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>10.1 km/h</value>
+            <value>8.0 km/h</value>
           </Data>
           <Data name="Course">
-            <value>135.00 ° True</value>
+            <value>90.00 ° True</value>
           </Data>
           <Data name="Valid GPS Fix">
             <value>True</value>
@@ -4949,7 +4951,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-16.960123,46.165205,-3.73</coordinates>
+          <coordinates>-16.912271,46.162738,8.43</coordinates>
         </Point>
       </Placemark>
       </Folder>

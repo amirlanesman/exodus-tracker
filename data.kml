@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <name>KML Export 5/20/2026 12:00:22 PM</name>
+    <name>KML Export 5/20/2026 12:30:19 PM</name>
     <Style id="style_emergency">
       <IconStyle>
         <colorMode>normal</colorMode>
@@ -5097,7 +5097,10 @@
 -11.70913,46.400821,-1.7
 -11.68263,46.401861,-5.76
 -11.655765,46.402473,-5.76
--11.629478,46.401153,-3.73</coordinates>
+-11.629478,46.401153,-3.73
+-11.603043,46.400875,-5.76
+-11.577143,46.402011,-5.76
+-11.550558,46.40052,-7.79</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -5105,18 +5108,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-20T11:50:00Z</when>
+          <when>2026-05-20T12:20:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>213366754</value>
+            <value>213373170</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/20/2026 11:50:00 AM</value>
+            <value>5/20/2026 12:20:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/20/2026 11:50:00 AM</value>
+            <value>5/20/2026 12:20:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -5134,19 +5137,19 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>46.401153</value>
+            <value>46.400520</value>
           </Data>
           <Data name="Longitude">
-            <value>-11.629478</value>
+            <value>-11.550558</value>
           </Data>
           <Data name="Elevation">
-            <value>-3.73 m from MSL</value>
+            <value>-7.79 m from MSL</value>
           </Data>
           <Data name="Velocity">
             <value>12.2 km/h</value>
           </Data>
           <Data name="Course">
-            <value>112.50 ° True</value>
+            <value>90.00 ° True</value>
           </Data>
           <Data name="Valid GPS Fix">
             <value>True</value>
@@ -5166,11 +5169,11 @@
           <Data name="SpatialRefSystem">
             <value>WGS84</value>
           </Data>
-        <Data name="Speed 1hr"><value>6.5 kn</value></Data><Data name="Speed 24hr"><value>6.2 kn</value></Data></ExtendedData>
+        <Data name="Speed 1hr"><value>6.6 kn</value></Data><Data name="Speed 24hr"><value>6.2 kn</value></Data></ExtendedData>
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-11.629478,46.401153,-3.73</coordinates>
+          <coordinates>-11.550558,46.40052,-7.79</coordinates>
         </Point>
       </Placemark>
       </Folder>

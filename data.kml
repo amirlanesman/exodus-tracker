@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <name>KML Export 5/21/2026 7:30:20 AM</name>
+    <name>KML Export 5/21/2026 8:00:23 AM</name>
     <Style id="style_emergency">
       <IconStyle>
         <colorMode>normal</colorMode>
@@ -5215,7 +5215,9 @@
 -9.022328,47.160196,-3.73
 -9.003296,47.174176,0.31
 -8.984628,47.188468,-1.7
--8.966325,47.202221,-1.7</coordinates>
+-8.966325,47.202221,-1.7
+-8.949951,47.21632,-3.73
+-8.93519,47.231973,-1.7</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -5223,18 +5225,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-21T07:30:00Z</when>
+          <when>2026-05-21T07:50:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>213518996</value>
+            <value>213523065</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/21/2026 7:30:00 AM</value>
+            <value>5/21/2026 7:50:00 AM</value>
           </Data>
           <Data name="Time">
-            <value>5/21/2026 7:30:00 AM</value>
+            <value>5/21/2026 7:50:00 AM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -5252,10 +5254,10 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>47.202221</value>
+            <value>47.231973</value>
           </Data>
           <Data name="Longitude">
-            <value>-8.966325</value>
+            <value>-8.935190</value>
           </Data>
           <Data name="Elevation">
             <value>-1.70 m from MSL</value>
@@ -5288,7 +5290,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-8.966325,47.202221,-1.7</coordinates>
+          <coordinates>-8.93519,47.231973,-1.7</coordinates>
         </Point>
       </Placemark>
       </Folder>

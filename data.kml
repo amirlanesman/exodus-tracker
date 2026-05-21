@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <name>KML Export 5/21/2026 12:00:27 PM</name>
+    <name>KML Export 5/21/2026 12:30:21 PM</name>
     <Style id="style_emergency">
       <IconStyle>
         <colorMode>normal</colorMode>
@@ -5241,7 +5241,10 @@
 -8.507903,47.512265,14.51
 -8.48726,47.52663,14.51
 -8.46694,47.541361,16.54
--8.44338,47.553526,-1.7</coordinates>
+-8.44338,47.553526,-1.7
+-8.417908,47.563826,-1.7
+-8.39231,47.574266,-3.73
+-8.367268,47.585285,-1.7</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -5249,18 +5252,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-21T11:50:00Z</when>
+          <when>2026-05-21T12:20:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>213573497</value>
+            <value>213579905</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/21/2026 11:50:00 AM</value>
+            <value>5/21/2026 12:20:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/21/2026 11:50:00 AM</value>
+            <value>5/21/2026 12:20:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -5278,16 +5281,16 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>47.553526</value>
+            <value>47.585285</value>
           </Data>
           <Data name="Longitude">
-            <value>-8.443380</value>
+            <value>-8.367268</value>
           </Data>
           <Data name="Elevation">
             <value>-1.70 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>14.3 km/h</value>
+            <value>15.3 km/h</value>
           </Data>
           <Data name="Course">
             <value>67.50 ° True</value>
@@ -5314,7 +5317,7 @@
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-8.44338,47.553526,-1.7</coordinates>
+          <coordinates>-8.367268,47.585285,-1.7</coordinates>
         </Point>
       </Placemark>
       </Folder>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <name>KML Export 5/23/2026 4:00:22 PM</name>
+    <name>KML Export 5/23/2026 5:00:37 PM</name>
     <Style id="style_emergency">
       <IconStyle>
         <colorMode>normal</colorMode>
@@ -5477,7 +5477,8 @@
 -4.151436,47.837048,55.15
 -4.17002,47.837658,55.15
 -4.174353,47.839031,42.95
--4.174783,47.838463,20.6</coordinates>
+-4.174783,47.838463,20.6
+-4.17592,47.838753,6.4</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -5485,18 +5486,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-23T12:06:00Z</when>
+          <when>2026-05-23T16:06:00Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>214023231</value>
+            <value>214077101</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/23/2026 12:06:00 PM</value>
+            <value>5/23/2026 4:06:00 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/23/2026 12:06:00 PM</value>
+            <value>5/23/2026 4:06:00 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -5514,13 +5515,13 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>47.838463</value>
+            <value>47.838753</value>
           </Data>
           <Data name="Longitude">
-            <value>-4.174783</value>
+            <value>-4.175920</value>
           </Data>
           <Data name="Elevation">
-            <value>20.60 m from MSL</value>
+            <value>6.40 m from MSL</value>
           </Data>
           <Data name="Velocity">
             <value>0.0 km/h</value>
@@ -5538,7 +5539,7 @@
             <value />
           </Data>
           <Data name="Event">
-            <value>Tracking interval received.</value>
+            <value>Tracking message received.</value>
           </Data>
           <Data name="Device Identifier">
             <value />
@@ -5546,11 +5547,11 @@
           <Data name="SpatialRefSystem">
             <value>WGS84</value>
           </Data>
-        <Data name="Speed 1hr"><value>3.1 kn</value></Data><Data name="Speed 24hr"><value>2.7 kn</value></Data></ExtendedData>
+        <Data name="Speed 1hr"><value>0.0 kn</value></Data><Data name="Speed 24hr"><value>1.9 kn</value></Data></ExtendedData>
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-4.174783,47.838463,20.6</coordinates>
+          <coordinates>-4.17592,47.838753,6.4</coordinates>
         </Point>
       </Placemark>
       </Folder>

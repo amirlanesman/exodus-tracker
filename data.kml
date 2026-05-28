@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <name>KML Export 5/28/2026 5:00:24 PM</name>
+    <name>KML Export 5/28/2026 5:30:22 PM</name>
     <Style id="style_emergency">
       <IconStyle>
         <colorMode>normal</colorMode>
@@ -5532,7 +5532,10 @@
 -3.454235,47.36985,2.34
 -3.441575,47.360376,2.34
 -3.428915,47.351203,2.34
--3.414495,47.341611,0.31</coordinates>
+-3.414495,47.341611,0.31
+-3.399625,47.331365,2.34
+-3.385698,47.320905,0.31
+-3.37291,47.31052,0.31</coordinates>
         </LineString>
       </Placemark>
     <Placemark>
@@ -5540,18 +5543,18 @@
         <visibility>true</visibility>
         <description />
         <TimeStamp>
-          <when>2026-05-28T16:57:15Z</when>
+          <when>2026-05-28T17:27:15Z</when>
         </TimeStamp>
         <styleUrl>#style_6179117</styleUrl>
         <ExtendedData>
           <Data name="Id">
-            <value>215179304</value>
+            <value>215183720</value>
           </Data>
           <Data name="Time UTC">
-            <value>5/28/2026 4:57:15 PM</value>
+            <value>5/28/2026 5:27:15 PM</value>
           </Data>
           <Data name="Time">
-            <value>5/28/2026 4:57:15 PM</value>
+            <value>5/28/2026 5:27:15 PM</value>
           </Data>
           <Data name="Name">
             <value>Daniel Pinsky</value>
@@ -5569,10 +5572,10 @@
             <value />
           </Data>
           <Data name="Latitude">
-            <value>47.341611</value>
+            <value>47.310520</value>
           </Data>
           <Data name="Longitude">
-            <value>-3.414495</value>
+            <value>-3.372910</value>
           </Data>
           <Data name="Elevation">
             <value>0.31 m from MSL</value>
@@ -5601,11 +5604,11 @@
           <Data name="SpatialRefSystem">
             <value>WGS84</value>
           </Data>
-        <Data name="Speed 1hr"><value>4.3 kn</value></Data><Data name="Speed 24hr"><value>0.4 kn</value></Data></ExtendedData>
+        <Data name="Speed 1hr"><value>4.9 kn</value></Data><Data name="Speed 24hr"><value>0.4 kn</value></Data></ExtendedData>
         <Point>
           <extrude>false</extrude>
           <altitudeMode>absolute</altitudeMode>
-          <coordinates>-3.414495,47.341611,0.31</coordinates>
+          <coordinates>-3.37291,47.31052,0.31</coordinates>
         </Point>
       </Placemark>
       </Folder>
